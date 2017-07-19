@@ -2,6 +2,10 @@ body {
     background-color: #dddce9;
 }
 
+.selectedMenu {
+    background-color: rgba(109, 82, 134, 0.15);
+}
+
 
 .well-1 {
     background-color: #acabb8;
