@@ -38,14 +38,16 @@ object Main extends js.JSApp {
   }
 
   object pageIds {
-    val landingPage = "landing-page"
-    val taxCalc = "tax-calculator"
-    val all = List(landingPage, taxCalc)
+    val landingPage = "About this program"
+    val taxCalc = "Tax calculator"
+    val vatCalc = "VAT Calculator"
+    val all = List(landingPage, taxCalc, vatCalc)
   }
 
   lazy val pageContents = Map(
-    pageIds.landingPage -> LandingPage.main,
-    pageIds.taxCalc -> example.ScalaJSExample.main
+     pageIds.landingPage -> LandingPage.main,
+     pageIds.taxCalc -> example.ScalaJSExample.main,
+     pageIds.vatCalc -> example.ScalaJSExample2.main
   )
 
   lazy val navigation = Rx {
