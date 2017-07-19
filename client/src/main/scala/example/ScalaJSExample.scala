@@ -65,8 +65,22 @@ object ScalaJSExample {
       else stage1()
     }
 
-    val taxToPayOutput =  Rx {
-      stage2()
+    val stage3 = Rx {
+      if(pensionReliefCheckboxIn()) {
+        stage2() * 1.1
+      }
+      else stage2()
+    }
+
+    val stage4 = Rx {
+      if(maintenanceReliefeChecboxIn()) {
+        stage3() + 320
+      }
+      else stage3()
+    }
+
+    val takeHomeMoney =  Rx {
+      stage4()
     }
 
   }
@@ -131,7 +145,7 @@ object ScalaJSExample {
           ),
           p(
             "Earnings After Tax Deductions",
-            input(readonly, value := model.taxToPayOutput, cls := "output")
+            input(readonly, value := model.takeHomeMoney, cls := "output")
           ),
 
           div(
