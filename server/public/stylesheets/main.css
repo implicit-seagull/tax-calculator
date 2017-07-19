@@ -15,9 +15,20 @@ body {
     background: darkgray;
 }
 
-.group {
+.group1 {
     border-left: dashed #5a5a63;
     padding: 20px;
+}
+
+.group2 {
+    border-left: dashed #acabb8;
+    padding: 20px;
+}
+
+.calckcheck{
+
+    padding: 20px;
+    border: 10px;
 }
 
 .well-1 {
