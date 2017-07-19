@@ -24,7 +24,7 @@ object LandingPage {
   implicit def ctx: Owner = Ctx.Owner.safe()
 
   lazy val main = div( cls := "text-center",
-    h1("Landing page -"),
+    h1("Landing page"),
       p("Welcome to the Personal Virtual Accountant landing page. From here you can navigate to calculators and metrics outputs regarding potential tax payments/reliefs and take home pay."),
     p(
       ul(

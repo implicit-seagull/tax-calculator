@@ -45,8 +45,8 @@ object ScalaJSExample2 {
       i
     }
 
-    val calc = div(
-      h1(cls := "text-center", "Vat Calculator"),
+    val calc = div(cls := "text-center",
+      h1( "Vat Calculator"),
       p(
         cls := "group",
         h3("Income from good's sold"),
