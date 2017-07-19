@@ -1,6 +1,5 @@
 package landingpage
 
-import example.TextAreaStats.Model
 import org.scalajs.dom
 import org.scalajs.dom.html.Pre
 import org.scalajs.dom.raw.KeyboardEvent
