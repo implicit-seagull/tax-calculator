@@ -47,7 +47,7 @@ object WIKI {
 
   def infoItem(textToBeDisplayed: String, wikiKey: String) = {
 
-    val tag = em(
+    val tag = label(
       id := wikiKey,
       textToBeDisplayed
     ).render
@@ -72,21 +72,30 @@ object WIKI {
   def infoPanel(key: String)(implicit ctx: Ctx.Owner) = Rx {
     if (!condition()) {
       div(
-        span(id := key, `class` := "glyphicon glyphicon-info-sign"),
-        label(id := key, info)
+        id := key,
+        span(`class` := "glyphicon glyphicon-info-sign"),
+        label(info)
       )
     } else {
       div(
-        label(id := key, info)
+        id := key,
+        label(info)
       )
     }
   }
 
   def main(thi: String, element: Element)(implicit ctx: Ctx.Owner) =
     div(
+      id := thi,
       element,
       infoPanel(thi)
     )
 
   implicit lazy val ctx = Ctx.Owner.safe()
+}
+
+object Fields {
+
+  val IR35 = WIKI.main("IR35", label(WIKI.infoItem("IR35", WIKI.wikiservice.keys.IR35), input(`type` := "checkbox")).render).render
+
 }
