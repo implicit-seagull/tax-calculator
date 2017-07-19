@@ -11,9 +11,8 @@ import shared.SharedMessages
 import scala.scalajs.js
 import scalatags.JsDom
 import scalatags.JsDom.TypedTag
-import scalatags.JsDom.all._
-import scalatags.generic.StylePair
-import scalatags.stylesheet.{ Cls, StyleSheet }
+import scalatags.JsDom.all.{p, _}
+import scalatags.stylesheet.{Cls, StyleSheet}
 import framework.Framework._
 import rx._
 import wiki.WIKI
@@ -24,16 +23,13 @@ object LandingPage {
 
   implicit def ctx: Owner = Ctx.Owner.safe()
 
-  lazy val main = div(
-    cls := "text-center",
-    "This is landing page",
-    p("paying taxes is very important"),
+  lazy val main = div( cls := "text-center",
+    h1("Landing page"),
+      p("Welcome to the Personal Virtual Accountant landing page. From here you can navigate to calculators and metrics outputs regarding potential tax payments/reliefs and take home pay."),
     p(
-      "here you will lean how:",
       ul(
-        p("asdfas"),
-        p("asdfas"),
-        p("asdfas")
+        li("Tax Calculator takes you to a new instance of the real time tax calculator for personal/sole-trader users"),
+        li("VAT calculator: takes you to a new instance of the VAT calculator to calculate what VAT is owed on your income from goods sales.")
       )
     )
   ).render

@@ -23,9 +23,11 @@ object ScalaJSExample {
 
   object model {
     val moneyInputField = Var(0.0)
-    val expencesInputField = Var(0.0)
-    val tax = 0.80
 
+    val tax0 = Rx {moneyInputField() *  0.2}
+    val takeHome0 = Rx {moneyInputField() - tax0()}
+
+    val expencesInputField = Var(0.0)
     val ir35CheckBoxIn = Var(false)
     val marriageCheckBoxIn = Var(false)
     val pensionReliefCheckboxIn = Var(false)
@@ -35,14 +37,14 @@ object ScalaJSExample {
     val expensesInput = Var(0.0)
 
     val earningAfterIncomeTax = Rx {
-      moneyInputField() * tax
+      moneyInputField() * 0.80
     }
 
     val earningAfterTaxDeductions = Rx {
       if (ir35CheckBoxIn()) {
-        moneyInputField() * tax * 0.8
+        moneyInputField() * 0.80 * 0.8
       } else {
-        moneyInputField() * tax
+        moneyInputField() * 0.80
       }
 
     }
@@ -126,7 +128,7 @@ object ScalaJSExample {
       i
     }
 
-    val calc = div(
+    val calc = div(cls := "text-center",
       h1("Tax Calculator"),
       p(
         cls := "group1",
@@ -141,9 +143,12 @@ object ScalaJSExample {
           questionMark
         ),
         div(
-          input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
-          span(cls := "label-for-input", "Initial earnings after income tax deductions"),
-          questionMark
+          input(readonly, value := model.tax0, cls := "output"),
+          span(cls := "label-for-input", "Your initial tax"), questionMark
+        ),
+        div(
+          input(readonly, value := model.takeHome0, cls := "output"),
+          span(cls := "label-for-input", "Your initial take home "), questionMark
         )
 
       ),

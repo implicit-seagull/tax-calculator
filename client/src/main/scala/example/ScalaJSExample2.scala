@@ -12,12 +12,9 @@ object ScalaJSExample2 {
 
   object model {
     val moneyInputField = Var(0.0)
-    val tax = 0.80
 
     val ir35CheckBoxIn = Var(false)
     val marriageCheckBoxIn = Var(false)
-    val expensesInput = Var(0.0)
-
     val stage1 = Rx {
       if (ir35CheckBoxIn()) {
         moneyInputField() * 0.95
@@ -48,8 +45,8 @@ object ScalaJSExample2 {
       i
     }
 
-    val calc = div(
-      h1("Vat Calculator"),
+    val calc = div(cls := "text-center",
+      h1( "Vat Calculator"),
       p(
         cls := "group",
         h3("Income from good's sold"),
@@ -76,7 +73,7 @@ object ScalaJSExample2 {
 
           div(
             cls := "debug-pane",
-            //comment it to hide debug
+            hidden,
             p("reduced rate = ", model.ir35CheckBoxIn.map(_.toString())),
             p("standard rate = ", model.marriageCheckBoxIn.map(_.toString()))
           )

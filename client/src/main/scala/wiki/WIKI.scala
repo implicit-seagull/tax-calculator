@@ -1,7 +1,7 @@
 package wiki
 
 import org.scalajs.dom
-import org.scalajs.dom.html.{ Element, Pre }
+import org.scalajs.dom.html.{Div, Element, Label, Pre}
 import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
@@ -13,7 +13,7 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{ Cls, StyleSheet }
+import scalatags.stylesheet.{Cls, StyleSheet}
 import framework.Framework._
 import rx._
 
@@ -54,7 +54,7 @@ object WIKI {
   val condition: Rx[Boolean] = Rx { info() == "" }
   val condition2: String => Rx[Boolean] = str => Rx { info().contains(str) }
 
-  def infoItem(textToBeDisplayed: String, wikiKey: String) = {
+  def infoItem(textToBeDisplayed: String, wikiKey: String): Label = {
 
     val tag = label(
       id := wikiKey,
@@ -75,20 +75,20 @@ object WIKI {
   def infoPanel(key: String)(implicit ctx: Ctx.Owner) = Rx {
     dom.console.log(key)
     if (!condition() && condition2(key)()) {
-      div(
+      div(cls := "redText",
         id := key,
         span(`class` := "glyphicon glyphicon-info-sign"),
         label(info)
       )
     } else {
-      div(
+      div(cls := "redText",
         id := key,
         label("")
       )
     }
   }
 
-  def main(thi: String, element: Element)(implicit ctx: Ctx.Owner) =
+  def main(thi: String, element: Element)(implicit ctx: Ctx.Owner): TypedTag[Div] =
     div(
       id := thi,
       element,
