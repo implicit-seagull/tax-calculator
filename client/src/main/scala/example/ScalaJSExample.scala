@@ -50,12 +50,15 @@ object ScalaJSExample extends js.JSApp {
       }
 //
 
-
+      val expenses = input(placeholder := "expenses").render
       val taxToPayOutput = input(readonly, value := model.out)
 
       val calc = div(
         p("tax calc"),
         meneyInput,
+        p("expenses"),
+        expenses,
+       p("IR35",input(`type`:= "checkbox")),
         div(
           p("you have to pay taxes:"),
           taxToPayOutput
