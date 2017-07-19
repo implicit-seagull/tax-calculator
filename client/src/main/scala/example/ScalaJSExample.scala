@@ -127,7 +127,7 @@ object ScalaJSExample {
     }
 
     val calc = div(
-      h1("Tax Calculator"),
+      h1(cls := "text-center", "Tax Calculator"),
       p(
         cls := "group1",
         h4("Income/Earnings"),
