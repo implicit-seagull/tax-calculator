@@ -90,7 +90,6 @@ object ScalaJSExample {
       i
     }
 
-    val earningsAfterInitialTax = input(readonly, value := model.earningAfterIncomeTax)
     //todo get values right
     val taxToPayOutput = input(readonly, value := model.earningAfterTaxDeductions)
     val corporationTax = input(readonly, value := model.earningAfterTaxDeductions)
@@ -99,7 +98,7 @@ object ScalaJSExample {
       p("Income/Earnings"),
       meneyInputField,
       p("Earnings after income tax deductions and NI"),
-      earningsAfterInitialTax,
+      input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
       p("put some more info about your profile:"),
       span(
         style := "display: inline",
@@ -122,7 +121,7 @@ object ScalaJSExample {
           ),
           p(
             "Earnings After Tax Deductions",
-            input(readonly, value := model.earningAfterTaxDeductions)
+            input(readonly, value := model.earningAfterTaxDeductions, cls := "output")
           ),
 
           div(
