@@ -30,7 +30,7 @@ object Main extends js.JSApp {
   }
 
   object model {
-    val selectedMenu = Var(pageIds.taxCalc)
+    val selectedMenu = Var(pageIds.landingPage)
     val page = Rx {
       val s: String = selectedMenu()
       pageContents(s)
@@ -54,14 +54,15 @@ object Main extends js.JSApp {
     div(
       id := "navigation",
       pageIds.all.map { pageId =>
-        val menuItem = if (pageId == model.selectedMenu()) {
+        val menuItem = if ( pageId == model.selectedMenu()) {
           div(cls := "btn-group", style := "width:100%", button(
-            style := "width:98%", pageId
-          )).render
-        } else {
+            style:= "width:98%", pageId)
+          ).render
+        }
+        else {
           div(cls := "btn-group button", style := "width:100%", button(
-            style := "width:98%", pageId
-          )).render
+            style := "width:98%", pageId)
+          ).render
         }
 
         menuItem.onclick = (_: Any) => {
