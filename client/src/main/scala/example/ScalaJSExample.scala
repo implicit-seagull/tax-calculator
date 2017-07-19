@@ -31,8 +31,14 @@ object ScalaJSExample {
     val pensionReliefCheckboxIn = Var(false)
     val maintenanceReliefeChecboxIn = Var(false)
 
+    val expensesInput = Var(0.0)
+
     val earningAfterIncomeTax = Rx {
       moneyInputField() * tax
+    }
+
+    val earningAfterTaxDeductions = Rx {
+      moneyInputField() * tax *  0.04
     }
 
     val stage1 = Rx {
@@ -84,21 +90,17 @@ object ScalaJSExample {
       i
     }
 
-
     val earningsAfterInitialTax = input(readonly, value := model.earningAfterIncomeTax)
     //todo get values right
-    val taxToPayOutput = input(readonly, value := model.earningAfterIncomeTax)
-    val corporationTax = input(readonly, value := model.earningAfterIncomeTax)
-    val earningsAfterTaxDeuctions = input(readonly, value := model.earningAfterIncomeTax)
-
-
+    val taxToPayOutput = input(readonly, value := model.earningAfterTaxDeductions)
+    val corporationTax = input(readonly, value := model.earningAfterTaxDeductions)
 
     val calc = div(
       p("Income/Earnings"),
       meneyInputField,
       p("Earnings after income tax deductions and NI"),
       earningsAfterInitialTax,
-      p(""),
+      p("put some more info about your profile:"),
       span(
         style := "display: inline",
         WIKI.main("IR35", label(WIKI.infoItem("IR35", WIKI.wikiservice.keys.IR35), ir35InputField).render),
@@ -111,13 +113,16 @@ object ScalaJSExample {
         //  taxToPayOutput,
         span(
           style := "display: inline",
-          h1(
-            "Self-Employed/Contractor expenses amount",
-            corporationTax
+          p(
+            "Self-Employed/Contractor expenses amount", {
+              val i = input(placeholder := "put money here").render
+              i.onkeyup = (x: Any) => model.expensesInput() = i.value.toDouble
+              i
+            }
           ),
-          h2(
+          p(
             "Earnings After Tax Deductions",
-            earningsAfterTaxDeuctions
+            input(readonly, value := model.earningAfterTaxDeductions)
           ),
 
           div(
