@@ -14,81 +14,79 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import rx._
 import wiki.WIKI
 
 import scalatags.JsDom.all._
 
-object ScalaJSExample  {
+object ScalaJSExample {
 
-    object logic {
+  object logic {
 
-      model.incomeTax.foreach { x =>
-        dom.console.log(x)
-      }
+    model.incomeTax.foreach { x =>
+      dom.console.log(x)
     }
+  }
 
-    object view {
+  object view {
 
-      val meneyInput = input(placeholder := "0").render
+    val meneyInput = input(placeholder := "0").render
 
-      meneyInput.onkeyup = (x: Any) => {
-        dom.console.log("wordbox on keyup ...")
-        model.in() = meneyInput.value.toDouble
+    meneyInput.onkeyup = (x: Any) => {
+      dom.console.log("wordbox on keyup ...")
+      model.in() = meneyInput.value.toDouble
 
-      }
-      //
+    }
+    //
 
-      val earningsAfterInitialTax = input().render
-      //todo get values right
-      val taxToPayOutput = input(readonly, value := model.incomeTax)
-      val corporationTax = input(readonly, value := model.incomeTax)
-      val nationalInsurance = input(readonly, value := model.incomeTax)
-      val calc = div(
-        p("Income/Earnings"),
-        meneyInput,
-        p("Earnings after income tax deductions and NI"),
-        earningsAfterInitialTax,
-        p(""),
+    val earningsAfterInitialTax = input().render
+    //todo get values right
+    val taxToPayOutput = input(readonly, value := model.incomeTax)
+    val corporationTax = input(readonly, value := model.incomeTax)
+    val nationalInsurance = input(readonly, value := model.incomeTax)
+    val calc = div(
+      p("Income/Earnings"),
+      meneyInput,
+      p("Earnings after income tax deductions and NI"),
+      earningsAfterInitialTax,
+      p(""),
+      span(
+        style := "display: inline",
+        WIKI.main("IR35", label(WIKI.infoItem("IR35", WIKI.wikiservice.keys.IR35), input(`type` := "checkbox")).render),
+        WIKI.main("Marriage allowance", label(WIKI.infoItem("Marriage allowance", WIKI.wikiservice.keys.marriageAllowance), input(`type` := "checkbox")).render),
+        WIKI.main("Pension Relief", label(WIKI.infoItem("Pension Relief", WIKI.wikiservice.keys.pensionRelief), input(`type` := "checkbox")).render),
+        WIKI.main("Maintenance Relief", label(WIKI.infoItem("Maintenance relief", WIKI.wikiservice.keys.maintenanceRelief), input(`type` := "checkbox")).render)
+      ),
+      div(
+        //  p("you have to pay taxes:"),
+        //  taxToPayOutput,
         span(
           style := "display: inline",
-          label("IR35", input(`type` := "checkbox")),
-          label("Marriage allowance", input(`type` := "checkbox")),
-          label("Pension Relief", input(`type` := "checkbox")),
-          label("Maintenance relief", input(`type` := "checkbox"))
-        ),
-        div(
-          //  p("you have to pay taxes:"),
-          //  taxToPayOutput,
-          span(
-            style := "display: inline",
-            h1(
-              "Self-Employed/Contractor expenses amount",
-              corporationTax
-            ),
-            h2(
-              "Earnings After Tax Deductions",
-              nationalInsurance
-            )
+          h1(
+            "Self-Employed/Contractor expenses amount",
+            corporationTax
+          ),
+          h2(
+            "Earnings After Tax Deductions",
+            nationalInsurance
           )
         )
       )
+    )
 
+  }
+
+  object model {
+    val in = Var(0.0)
+    val tax = 0.80
+    val incomeTax = Rx {
+      in() * tax
     }
-
-    object model {
-      val in = Var(0.0)
-      val tax = 0.80
-      val incomeTax = Rx {
-        in() * tax
-      }
-    }
-
+  }
 
   val main = view.calc.render
-
 
   implicit def ctx: Owner = Ctx.Owner.safe()
 

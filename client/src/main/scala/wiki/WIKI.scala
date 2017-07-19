@@ -29,19 +29,15 @@ object WIKI {
       val marriageAllowance = "marriageAllowance"
       val pensionRelief = "pension"
       val NI = "NI"
-      val incomeTax = "IncomeTax"
+      val maintenanceRelief = "IncomeTax"
     }
 
     val keystore = Map[String, String](
       keys.hello -> "Hello is a greeting word used to say you know hi but in slighty longer way ...",
-      keys.incomeTax -> """Standard personal (tax free) allowance of £11,500 per year,
-          |Standard tax rate- 20% on all incomes between £11,501 and £45,000,
-          |Higher rate - 40% on all incomes between £45,001 and £150,000,
-          | Additional rate - 45% on all incomes over £150,000 per year,
-          |You have No personal tax allowance on incomes over £123,000 per year
-          |
-        """.stripMargin,
-      keys.IR35 -> "Pay 25% more tax if you’re inside IR35"
+      keys.maintenanceRelief -> " If you are providing maintenance payments to an ex-spouse or former civil partner or for children under 21, you can claim back 10% of the maintenance payments up to £326",
+      keys.IR35 -> "Pay 25% more tax if you’re inside IR35",
+      keys.marriageAllowance -> "Allows you to transfer up to £1,150 from your tax allowance to your spouse if their earnings are higher than yours. Reduces their tax by £230 pounds for that year.   ",
+      keys.pensionRelief -> "20% added to your pension pot after your employer claims the relief. This is only if they take pension contributions before tax.  (Only applies to tax rates of above 20%) At 40% tax you get 20% relief. At 45% tax you get 25% relief. "
     )
 
   }
@@ -74,14 +70,14 @@ object WIKI {
   )
 
   def infoPanel(key: String)(implicit ctx: Ctx.Owner) = Rx {
-    if (condition()) {
+    if (!condition()) {
       div(
         span(id := key, `class` := "glyphicon glyphicon-info-sign"),
-        label(info)
+        label(id := key, info)
       )
     } else {
       div(
-        label(info)
+        label(id := key, info)
       )
     }
   }
@@ -91,7 +87,6 @@ object WIKI {
       element,
       infoPanel(thi)
     )
-
 
   implicit lazy val ctx = Ctx.Owner.safe()
 }
