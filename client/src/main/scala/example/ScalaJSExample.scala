@@ -38,7 +38,7 @@ object ScalaJSExample extends js.JSApp {
 
     object logic {
 
-      model.out.foreach { x =>
+      model.incomeTax.foreach { x =>
         dom.console.log(x)
       }
     }
@@ -54,16 +54,16 @@ object ScalaJSExample extends js.JSApp {
       }
       //
 
-      val expenses = input(placeholder := "expenses").render
+      val earningsAfterInitialTax = input().render
       //todo get values right
-      val taxToPayOutput = input(readonly, value := model.out)
-      val corporationTax = input(readonly, value := model.out)
-      val nationalInsurance = input(readonly, value := model.out)
+      val taxToPayOutput = input(readonly, value := model.incomeTax)
+      val corporationTax = input(readonly, value := model.incomeTax)
+      val nationalInsurance = input(readonly, value := model.incomeTax)
       val calc = div(
         p("Income/Earnings"),
         meneyInput,
         p("Earnings after income tax deductions and NI"),
-        expenses,
+        earningsAfterInitialTax,
         p(""),
         span(
           style := "display: inline",
@@ -88,8 +88,8 @@ object ScalaJSExample extends js.JSApp {
 
     object model {
       val in = Var(0.0)
-      val tax = 0.19
-      val out = Rx {
+      val tax = 0.80
+      val incomeTax = Rx {
         in() * tax
       }
     }
