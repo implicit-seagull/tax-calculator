@@ -24,15 +24,15 @@ object LandingPage {
 
   implicit def ctx: Owner = Ctx.Owner.safe()
 
-  lazy val main = div(
+  lazy val main = div( cls := "text-center",
     "This is landing page",
     p("paying taxes is very important"),
     p(
       "here you will lean how:",
       ul(
-        li("asdfas"),
-        li("asdfas"),
-        li("asdfas")
+        p("asdfas"),
+        p("asdfas"),
+        p("asdfas")
       )
     )
   ).render

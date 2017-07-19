@@ -30,7 +30,7 @@ object Main extends js.JSApp {
   }
 
   object model {
-    val selectedMenu = Var(pageIds.taxCalc)
+    val selectedMenu = Var(pageIds.landingPage)
     val page = Rx {
       val s: String = selectedMenu()
       pageContents(s)
