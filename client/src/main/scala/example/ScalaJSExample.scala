@@ -1,7 +1,7 @@
 package example
 
 import org.scalajs.dom
-import org.scalajs.dom.html.{Input, Pre}
+import org.scalajs.dom.html.{ Input, Pre }
 import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
@@ -65,28 +65,24 @@ object ScalaJSExample {
     }
 
     val stage3 = Rx {
-      if(pensionReliefCheckboxIn()) {
+      if (pensionReliefCheckboxIn()) {
         stage2() * 1.1
-      }
-      else stage2()
+      } else stage2()
     }
 
     val stage4 = Rx {
-      if(maintenanceReliefeChecboxIn()) {
+      if (maintenanceReliefeChecboxIn()) {
         stage3() + 320
-      }
-      else stage3()
+      } else stage3()
     }
 
     val stage5 = Rx {
-      if(charityReliefeChecboxIn()) {
+      if (charityReliefeChecboxIn()) {
         stage4() + 68
-      }
-      else stage4()
+      } else stage4()
     }
 
-
-    val takeHomeMoney =  Rx {
+    val takeHomeMoney = Rx {
       stage5() + expencesInputField()
     }
 
@@ -141,7 +137,7 @@ object ScalaJSExample {
         }
       ),
       p("Earnings after income tax deductions and NI"),
-      WIKI.main("Income Tax", label(WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.IR35), input(readonly, value := model.earningAfterIncomeTax, cls := "output")).render),
+      WIKI.main("Income Tax", label(WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.incomeTax), input(readonly, value := model.earningAfterIncomeTax, cls := "output")).render),
       p("put some more info about your profile:"),
       span(
         style := "display: inline",
@@ -149,7 +145,7 @@ object ScalaJSExample {
         WIKI.main("Marriage allowance", label(WIKI.infoItem("Marriage allowance", WIKI.wikiservice.keys.marriageAllowance), marriageInputField).render),
         WIKI.main("Pension Relief", label(WIKI.infoItem("Pension Relief", WIKI.wikiservice.keys.pensionRelief), pensionReliefInputField).render),
         WIKI.main("Maintenance Relief", label(WIKI.infoItem("Maintenance relief", WIKI.wikiservice.keys.maintenanceRelief), maintenanceInputField).render),
-        WIKI.main("Maintenance Relief", label(WIKI.infoItem("Charity relief", WIKI.wikiservice.keys.charityRelief), charityReliefInputField).render)
+        WIKI.main("Charity Relief", label(WIKI.infoItem("Charity relief", WIKI.wikiservice.keys.charityRelief), charityReliefInputField).render)
       ),
       div(
         //  p("you have to pay taxes:"),
@@ -157,13 +153,11 @@ object ScalaJSExample {
         span(
           style := "display: inline",
           p(
-            "Self-Employed/Contractor expenses amount", expensivesInputField
+            WIKI.main("expenses", label(WIKI.infoItem("Self-Employed/Contractor expenses amount", WIKI.wikiservice.keys.expenses), expensivesInputField).render)
           ),
           p(
-            "Earnings After Tax Deductions",
-            input(readonly, value := model.takeHomeMoney, cls := "output")
+            WIKI.main("Take Home Pay", label(WIKI.infoItem("Earnings After Tax Deductions", WIKI.wikiservice.keys.takeHomePay), input(readonly, value := model.takeHomeMoney, cls := "output")).render)
           ),
-
           div(
             cls := "debug-pane",
             hidden, //comment it to hide debug

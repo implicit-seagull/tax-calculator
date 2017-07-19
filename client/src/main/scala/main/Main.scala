@@ -52,15 +52,14 @@ object Main extends js.JSApp {
     div(
       id := "navigation",
       pageIds.all.map { pageId =>
-        val menuItem = if ( pageId == model.selectedMenu()) {
+        val menuItem = if (pageId == model.selectedMenu()) {
           div(cls := "btn-group", style := "width:100%", button(
-            style:= "width:98%", pageId)
-          ).render
-        }
-        else {
+            style := "width:98%", pageId
+          )).render
+        } else {
           div(cls := "btn-group button", style := "width:100%", button(
-            style := "width:98%", pageId)
-          ).render
+            style := "width:98%", pageId
+          )).render
         }
 
         menuItem.onclick = (_: Any) => {

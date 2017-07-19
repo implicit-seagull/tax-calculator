@@ -28,8 +28,10 @@ object WIKI {
       val pensionRelief = "pension"
       val NI = "NI"
       val maintenanceRelief = "maintenanceRelief"
-      val incomeTax = "incomeTax"
-      val charityRelief = "charityRelief"
+      val charityRelief = "charity Relief"
+      val incomeTax = "Income Tax"
+      val expenses = "Self-Employed/Contractor expenses amount"
+      val takeHomePay = "Take Home Pay"
     }
 
     val keystore = Map[String, String](
@@ -37,7 +39,10 @@ object WIKI {
       keys.IR35 -> "Pay 25% more tax if you’re inside IR35",
       keys.marriageAllowance -> "Marriage allowance : Allows you to transfer up to £1,150 from your tax allowance to your spouse if their earnings are higher than yours. Reduces their tax by £230 pounds for that year.   ",
       keys.pensionRelief -> "Pension Relief : 20% added to your pension pot after your employer claims the relief. This is only if they take pension contributions before tax.  (Only applies to tax rates of above 20%) At 40% tax you get 20% relief. At 45% tax you get 25% relief. ",
-      keys.charityRelief -> "TODO: .... "
+      keys.charityRelief -> "Charity Relief : tick this if you have donated to charity this year,  this allows you to reclaim the difference between the donated amount and what the charity received in relief. ",
+      keys.incomeTax -> "Income Tax : tax paid on your income. The standard tax rate is 20%. This increases to 40% with income over £45,000 pounds and 45% with income over £150,000. ",
+      keys.expenses -> "if you are self-employed/contractor, you can claim work related expenses and remove them from your tax bill. This include, but are not limited to travel costs, office, staff salaries and marketing costs. ",
+      keys.takeHomePay -> "Take Home Pay"
     )
   }
 
