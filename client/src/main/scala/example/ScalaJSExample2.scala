@@ -73,6 +73,7 @@ object ScalaJSExample2 {
 
           div(
             cls := "debug-pane",
+            hidden,
             p("reduced rate = ", model.ir35CheckBoxIn.map(_.toString())),
             p("standard rate = ", model.marriageCheckBoxIn.map(_.toString()))
           )
