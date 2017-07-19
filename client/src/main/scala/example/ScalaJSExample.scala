@@ -14,7 +14,7 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{ Cls, StyleSheet }
+import scalatags.stylesheet.{Cls, StyleSheet}
 import framework.Framework._
 import rx._
 import wiki.WIKI
@@ -59,23 +59,29 @@ object ScalaJSExample extends js.JSApp {
       val taxToPayOutput = input(readonly, value := model.out)
       val corporationTax = input(readonly, value := model.out)
       val nationalInsurance = input(readonly, value := model.out)
-      val personalTax = input(readonly, value := model.out)
       val calc = div(
-        p("tax calc"),
+        p("Income/Earnings"),
         meneyInput,
-        p("expenses"),
+        p("Earnings after income tax deductions and NI"),
         expenses,
-        p("IR35", input(`type` := "checkbox")),
+        p(""),
+        span(
+          style := "display: inline",
+          label("IR35", input(`type` := "checkbox")),
+          label("Marriage allowance", input(`type` := "checkbox")),
+          label("Pension Relief", input(`type` := "checkbox")),
+          label("Maintenance relief", input(`type` := "checkbox"))
+        ),
         div(
-          p("you have to pay taxes:"),
-          taxToPayOutput,
-          p("Corporation Tax"),
-          corporationTax,
-          p("nationalInsurance"),
-          nationalInsurance,
-          p("personalTax"),
-          personalTax
-        )
+        //  p("you have to pay taxes:"),
+        //  taxToPayOutput,
+          span(
+            style := "display: inline",
+          h1("Self-Employed/Contractor expenses amount",
+          corporationTax),
+            h2("Earnings After Tax Deductions",
+          nationalInsurance)
+        ))
       )
 
     }
@@ -83,7 +89,9 @@ object ScalaJSExample extends js.JSApp {
     object model {
       val in = Var(0.0)
       val tax = 0.19
-      val out = Rx { in() * tax }
+      val out = Rx {
+        in() * tax
+      }
     }
 
   }
