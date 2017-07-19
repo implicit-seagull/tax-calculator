@@ -126,7 +126,7 @@ object ScalaJSExample {
         }
       ),
       p("Earnings after income tax deductions and NI"),
-      WIKI.main("Income Tax", WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.)input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
+      WIKI.main("Income Tax", label(WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.IR35), input(readonly, value := model.earningAfterIncomeTax, cls := "output")).render),
       p("put some more info about your profile:"),
       span(
         style := "display: inline",
