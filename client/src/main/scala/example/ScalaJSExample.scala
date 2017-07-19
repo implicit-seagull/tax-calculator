@@ -154,7 +154,7 @@ object ScalaJSExample {
 
           div(
             cls := "debug-pane",
-            //hidden, //comment it to hide debug
+            hidden, //comment it to hide debug
             p("ir35 = ", model.ir35CheckBoxIn.map(_.toString())),
             p("married = ", model.marriageCheckBoxIn.map(_.toString())),
             p("pension = ", model.pensionReliefCheckboxIn.map(_.toString())),
