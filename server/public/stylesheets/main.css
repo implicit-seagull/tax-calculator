@@ -1,5 +1,6 @@
 body {
     background-color: #dddce9;
+    padding: 100px;
 }
 
 .selectedMenu {
@@ -12,6 +13,11 @@ body {
 
 .output {
     background: darkgray;
+}
+
+.group {
+    border-left: dashed #5a5a63;
+    padding: 20px;
 }
 
 .well-1 {

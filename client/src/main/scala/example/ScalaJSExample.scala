@@ -1,7 +1,7 @@
 package example
 
 import org.scalajs.dom
-import org.scalajs.dom.html.{ Input, Pre }
+import org.scalajs.dom.html.{Input, Pre}
 import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
@@ -24,6 +24,7 @@ object ScalaJSExample {
 
   object model {
     val moneyInputField = Var(0.0)
+    val expencesInputField = Var(0.0)
     val tax = 0.80
 
     val ir35CheckBoxIn = Var(false)
@@ -62,19 +63,27 @@ object ScalaJSExample {
       } else stage1()
     }
 
-    val taxToPayOutput = Rx {
-      stage2()
+    val stage3 = Rx {
+      if(pensionReliefCheckboxIn()) {
+        stage2() * 1.1
+      }
+      else stage2()
+    }
+
+    val stage4 = Rx {
+      if(maintenanceReliefeChecboxIn()) {
+        stage3() + 320
+      }
+      else stage3()
+    }
+
+    val takeHomeMoney =  Rx {
+      stage4() + expencesInputField()
     }
 
   }
 
   object view {
-
-    val meneyInputField: Input = {
-      val i = input(placeholder := "put money here").render
-      i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
-      i
-    }
 
     val ir35InputField: Input = {
       val i = input(`type` := "checkbox").render
@@ -99,10 +108,23 @@ object ScalaJSExample {
       i.onchange = (x: Any) => model.maintenanceReliefeChecboxIn() = i.checked
       i
     }
+    val expensivesInputField: Input = {
+      val i = input(placeholder := "put money here").render
+      i.onkeyup = (x: Any) => model.expencesInputField() = i.value.toDouble
+      i
+    }
 
     val calc = div(
-      p("Income/Earnings"),
-      meneyInputField,
+      h1("Tax Calculator"),
+      p(
+        cls := "group",
+        h3("Income/Earnings"),
+        {
+          val i = input(placeholder := "put money here").render
+          i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
+          i
+        }
+      ),
       p("Earnings after income tax deductions and NI"),
       WIKI.main("Income Tax", WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.)input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
       p("put some more info about your profile:"),
@@ -119,20 +141,16 @@ object ScalaJSExample {
         span(
           style := "display: inline",
           p(
-            "Self-Employed/Contractor expenses amount", {
-              val i = input(placeholder := "put money here").render
-              i.onkeyup = (x: Any) => model.expensesInput() = i.value.toDouble
-              i
-            }
+            "Self-Employed/Contractor expenses amount", expensivesInputField
           ),
           p(
             "Earnings After Tax Deductions",
-            input(readonly, value := model.taxToPayOutput, cls := "output")
+            input(readonly, value := model.takeHomeMoney, cls := "output")
           ),
 
           div(
             cls := "debug-pane",
-            //hidden, //comment it to hide debug
+            hidden, //comment it to hide debug
             p("ir35 = ", model.ir35CheckBoxIn.map(_.toString())),
             p("married = ", model.marriageCheckBoxIn.map(_.toString())),
             p("pension = ", model.pensionReliefCheckboxIn.map(_.toString())),
