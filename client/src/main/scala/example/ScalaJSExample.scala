@@ -21,20 +21,19 @@ import wiki.WIKI
 
 import scalatags.JsDom.all._
 
-object ScalaJSExample extends js.JSApp {
+object ScalaJSExample  {
 
-  def main(): Unit = {
+//
+//    dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
+//
+//    dom.document.getElementById("example1").innerHTML = ""
+//    dom.document.getElementById("example1").appendChild(
+//      view.calc.render
+//    )
 
-    dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
-
-    dom.document.getElementById("example1").innerHTML = ""
-    dom.document.getElementById("example1").appendChild(
-      view.calc.render
-    )
-
-    dom.document.getElementById("wikiDemo").appendChild(
-      WIKI.main.render
-    )
+//    dom.document.getElementById("wikiDemo").appendChild(
+//      WIKI.main.render
+//    )
 
     object logic {
 
@@ -94,7 +93,9 @@ object ScalaJSExample extends js.JSApp {
       }
     }
 
-  }
+
+  val main = view.calc.render
+
 
   implicit def ctx: Owner = Ctx.Owner.safe()
 

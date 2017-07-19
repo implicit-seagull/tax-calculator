@@ -65,6 +65,6 @@ object WIKI {
     id := "info demo",
     content,
     infoPanel
-  )
+  ).render
 
 }
