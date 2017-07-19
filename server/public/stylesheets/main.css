@@ -2,6 +2,17 @@ body {
     background-color: #dddce9;
 }
 
+.selectedMenu {
+    background-color: rgba(109, 82, 134, 0.15);
+}
+
+.debug-pane {
+    background-color: aqua;
+}
+
+.output {
+    background: darkgray;
+}
 
 .well-1 {
     background-color: #acabb8;

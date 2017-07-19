@@ -1,6 +1,5 @@
 package wiki
 
-import example.TextAreaStats.Model
 import org.scalajs.dom
 import org.scalajs.dom.html.{ Element, Pre }
 import org.scalajs.dom.raw.KeyboardEvent
