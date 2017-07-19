@@ -75,13 +75,13 @@ object WIKI {
   def infoPanel(key: String)(implicit ctx: Ctx.Owner) = Rx {
     dom.console.log(key)
     if (!condition() && condition2(key)()) {
-      div(
+      div(cls := "redText",
         id := key,
         span(`class` := "glyphicon glyphicon-info-sign"),
         label(info)
       )
     } else {
-      div(
+      div(cls := "redText",
         id := key,
         label("")
       )
