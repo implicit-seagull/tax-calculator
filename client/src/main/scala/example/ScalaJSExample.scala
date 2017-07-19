@@ -23,10 +23,6 @@ object ScalaJSExample {
 
   object model {
     val moneyInputField = Var(0.0)
-
-    val tax0 = Rx {moneyInputField() *  0.2}
-    val takeHome0 = Rx {moneyInputField() - tax0()}
-
     val expencesInputField = Var(0.0)
     val ir35CheckBoxIn = Var(false)
     val marriageCheckBoxIn = Var(false)
@@ -34,20 +30,10 @@ object ScalaJSExample {
     val maintenanceReliefeChecboxIn = Var(false)
     val charityReliefeChecboxIn = Var(false)
 
-    val expensesInput = Var(0.0)
+    val tax0FlatRate = Rx {if(ir35CheckBoxIn()) 0.2 + 0.2 else 0.2}
+    val tax0 = Rx {moneyInputField() * tax0FlatRate() }
+    val takeHome0 = Rx {moneyInputField() - tax0()}
 
-    val earningAfterIncomeTax = Rx {
-      moneyInputField() * 0.80
-    }
-
-    val earningAfterTaxDeductions = Rx {
-      if (ir35CheckBoxIn()) {
-        moneyInputField() * 0.80 * 0.8
-      } else {
-        moneyInputField() * 0.80
-      }
-
-    }
 
     val stage1 = Rx {
       //some computations
@@ -142,22 +128,26 @@ object ScalaJSExample {
           span(cls := "label-for-input", "put money here"),
           questionMark
         ),
+        WIKI.main("IR35", label(WIKI.infoItem("IR35", WIKI.wikiservice.keys.IR35), ir35InputField).render),
         div(
-          input(readonly, value := model.tax0, cls := "output"),
+          input(readonly, value := model.tax0FlatRate.map(x => f"$x%1.2f"), cls := "output"),
+          span(cls := "label-for-input", "Your tax rate"), questionMark
+        ),
+        div(
+          input(readonly, value := model.tax0.map(x => f"$x%1.2f"), cls := "output"),
           span(cls := "label-for-input", "Your initial tax"), questionMark
         ),
         div(
-          input(readonly, value := model.takeHome0, cls := "output"),
+          input(readonly, value := model.takeHome0.map(x => f"$x%1.2f"), cls := "output"),
           span(cls := "label-for-input", "Your initial take home "), questionMark
         )
-
       ),
       //TODO NI
+
 
       p("put some more info about your profile:"),
       span(
         style := "display: inline",
-        WIKI.main("IR35", label(WIKI.infoItem("IR35", WIKI.wikiservice.keys.IR35), ir35InputField).render),
         WIKI.main("Marriage allowance", label(WIKI.infoItem("Marriage allowance", WIKI.wikiservice.keys.marriageAllowance), marriageInputField).render),
         WIKI.main("Pension Relief", label(WIKI.infoItem("Pension Relief", WIKI.wikiservice.keys.pensionRelief), pensionReliefInputField).render),
         WIKI.main("Maintenance Relief", label(WIKI.infoItem("Maintenance relief", WIKI.wikiservice.keys.maintenanceRelief), maintenanceInputField).render),
