@@ -13,6 +13,11 @@ body {
 
 .output {
     background: darkgray;
+    margin: 7px;
+}
+
+.the-input {
+    margin: 7px;
 }
 
 

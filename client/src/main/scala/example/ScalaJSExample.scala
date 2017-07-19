@@ -1,7 +1,7 @@
 package example
 
 import org.scalajs.dom
-import org.scalajs.dom.html.{ Input, Pre }
+import org.scalajs.dom.html.{Input, Pre}
 import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
@@ -11,9 +11,8 @@ import shared.SharedMessages
 import scala.scalajs.js
 import scalatags.JsDom
 import scalatags.JsDom.TypedTag
-import scalatags.JsDom.all._
-import scalatags.generic.StylePair
-import scalatags.stylesheet.{ Cls, StyleSheet }
+import scalatags.JsDom.all.{p, _}
+import scalatags.stylesheet.{Cls, StyleSheet}
 import framework.Framework._
 import rx._
 import wiki.WIKI
@@ -90,6 +89,8 @@ object ScalaJSExample {
 
   object view {
 
+    val questionMark = span(cls := "glyphicon glyphicon-question-sign")
+
     val ir35InputField: Input = {
       val i = input(`type` := "checkbox").render
       i.onchange = (x: Any) => model.ir35CheckBoxIn() = i.checked
@@ -132,17 +133,22 @@ object ScalaJSExample {
         h4("Income/Earnings"),
         div(
           {
-            val i = input(placeholder := "put money here").render
+            val i = input(placeholder := "put money here", cls:= "the-input").render
             i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
             i
           },
           span(cls := "label-for-input", "put money here"),
-          span(cls := "glyphicon glyphicon-question-sign")
+          questionMark
+        ),
+        div(
+          input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
+          span(cls := "label-for-input", "Initial earnings after income tax deductions"),
+          questionMark
         )
 
       ),
-      p("Earnings after income tax deductions and NI"),
-      WIKI.main("Income Tax", label(WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.incomeTax), input(readonly, value := model.earningAfterIncomeTax, cls := "output")).render),
+      //TODO NI
+
       p("put some more info about your profile:"),
       span(
         style := "display: inline",
