@@ -31,6 +31,7 @@ object LandingPage {
         li("Tax Calculator takes you to a new instance of the real time tax calculator for personal/sole-trader users"),
         li("VAT calculator: takes you to a new instance of the VAT calculator to calculate what VAT is owed on your income from goods sales.")
       )
-    )
+    ),
+    img(src := "/assets/images/implicitSeagull.png")
   ).render
 }
