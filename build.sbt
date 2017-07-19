@@ -1,5 +1,7 @@
 val scalaV = "2.12.2"
 
+import Dependencies._
+
 lazy val server = (project in file("server")).settings(
   scalaVersion := scalaV,
   scalaJSProjects := Seq(client),
@@ -10,7 +12,8 @@ lazy val server = (project in file("server")).settings(
   libraryDependencies ++= Seq(
     "com.vmunier" %% "scalajs-scripts" % "1.1.1",
     guice,
-    specs2 % Test
+    specs2 % Test,
+    Dependencies.upicle
   ),
   // Compile the project before generating Eclipse files, so that generated .scala or .class files for views and routes are present
   EclipseKeys.preTasks := Seq(compile in Compile)
@@ -21,7 +24,9 @@ lazy val client = (project in file("client")).settings(
   scalaVersion := scalaV,
   scalaJSUseMainModuleInitializer := true,
   libraryDependencies ++= Seq(
-    "org.scala-js" %%% "scalajs-dom" % "0.9.1"
+    "org.scala-js" %%% "scalajs-dom" % "0.9.1",
+    "com.lihaoyi" %%% "scalatags" % scalaTagsVersion,
+    "com.lihaoyi" %%% "scalarx" % scalaRxVersion
   )
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
   dependsOn(sharedJs)
@@ -32,6 +37,7 @@ lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared")).
 
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
+
 
 // loads the server project at sbt startup
 onLoad in Global := (Command.process("project server", _: State)) compose (onLoad in Global).value
