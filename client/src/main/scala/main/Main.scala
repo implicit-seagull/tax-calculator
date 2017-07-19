@@ -1,6 +1,5 @@
 package main
 
-import example.TextAreaStats.Model
 import org.scalajs.dom
 import org.scalajs.dom.html.Pre
 import org.scalajs.dom.raw.KeyboardEvent
@@ -41,8 +40,7 @@ object Main extends js.JSApp {
   object pageIds {
     val landingPage = "landing-page"
     val taxCalc = "tax-calculator"
-    val wikiExamle = "wiki-example"
-    val all = List(landingPage, taxCalc, wikiExamle)
+    val all = List(landingPage, taxCalc)
   }
 
   lazy val pageContents = Map(
@@ -50,21 +48,33 @@ object Main extends js.JSApp {
     pageIds.taxCalc -> example.ScalaJSExample.main
   )
 
-  lazy val navigation = div(
-    id := "navigation",
-    pageIds.all.map { page =>
+  lazy val navigation = Rx {
+    div(
+      id := "navigation",
+      pageIds.all.map { pageId =>
+        val menuItem = if ( pageId == model.selectedMenu()) {
+          li(
+            cls := "selectedMenu",
+            pageId
+          ).render
+        }
+        else {
+          li(pageId).render
+        }
 
-      val menuItem = li(page).render
 
-      menuItem.onclick = (_: Any) => {
-        model.selectedMenu() = page
+
+        menuItem.onclick = (_: Any) => {
+          model.selectedMenu() = pageId
+        }
+
+        ul(
+          menuItem
+        )
       }
+    )
+  }
 
-      ul(
-        menuItem
-      )
-    }
-  )
 
   val contentPage = div(
     id := "contentPage",
