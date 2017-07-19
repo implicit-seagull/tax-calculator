@@ -15,6 +15,14 @@ body {
     background: darkgray;
 }
 
+
+.label-for-input{
+    margin-left: 20px;
+    font-weight: 900;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .group1 {
     border-left: dashed #5a5a63;
     padding: 20px;

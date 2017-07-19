@@ -128,13 +128,18 @@ object ScalaJSExample {
     val calc = div(
       h1("Tax Calculator"),
       p(
-        cls := "group",
-        h3("Income/Earnings"),
-        {
-          val i = input(placeholder := "put money here").render
-          i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
-          i
-        }
+        cls := "group1",
+        h4("Income/Earnings"),
+        div(
+          {
+            val i = input(placeholder := "put money here").render
+            i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
+            i
+          },
+          span(cls := "label-for-input", "put money here"),
+          span(cls := "glyphicon glyphicon-question-sign")
+        )
+
       ),
       p("Earnings after income tax deductions and NI"),
       WIKI.main("Income Tax", label(WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.incomeTax), input(readonly, value := model.earningAfterIncomeTax, cls := "output")).render),
