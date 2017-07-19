@@ -1,0 +1,36 @@
+body {
+    background-color: #dddce9;
+}
+
+
+.well-1 {
+    background-color: #acabb8;
+    border: solid black 1px;
+    padding: 9px;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+.well-2 {
+    background-color: #9897a4;
+    border: solid black 1px;
+    padding: 9px;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+.well-3 {
+    background-color: #5a5a63;
+    border: solid black 1px;
+    padding: 9px;
+    margin: 5px;
+    border-radius: 15px;
+}
+
+
+.style1 {
+    background-color: blueviolet;
+}
+.style2 {
+    background-color: aquamarine;
+}
