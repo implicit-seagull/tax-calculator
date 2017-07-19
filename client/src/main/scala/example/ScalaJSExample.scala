@@ -182,7 +182,7 @@ object ScalaJSExample {
       div(
         cls := "text-center",
         style := "width: 50%; height: 150%;",
-        iframe(src := "http://www.bbc.co.uk/staticarchive/507fdbb5c9ca6cfe021cabeb0e98b4e4fc3623f1.gif", style := "width: 50%; height: 150%;")
+        img(src := "http://www.bbc.co.uk/staticarchive/507fdbb5c9ca6cfe021cabeb0e98b4e4fc3623f1.gif", style := "width: 50%; height: 150%;")
       )
     )
   }
