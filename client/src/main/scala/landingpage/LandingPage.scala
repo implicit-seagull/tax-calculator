@@ -1,7 +1,5 @@
 package landingpage
 
-
-
 import example.TextAreaStats.Model
 import org.scalajs.dom
 import org.scalajs.dom.html.Pre
@@ -16,13 +14,12 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import rx._
 import wiki.WIKI
 
 import scalatags.JsDom.all._
-
 
 object LandingPage {
 
@@ -31,7 +28,8 @@ object LandingPage {
   lazy val main = div(
     "This is landing page",
     p("paying taxes is very important"),
-    p("here you will lean how:",
+    p(
+      "here you will lean how:",
       ul(
         li("asdfas"),
         li("asdfas"),

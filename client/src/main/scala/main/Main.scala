@@ -14,7 +14,7 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import landingpage.LandingPage
 import rx._
@@ -29,7 +29,6 @@ object Main extends js.JSApp {
     main.innerHTML = ""
     main.appendChild(mainDiv)
   }
-
 
   object model {
     val selectedMenu = Var(pageIds.taxCalc)
@@ -48,8 +47,7 @@ object Main extends js.JSApp {
 
   lazy val pageContents = Map(
     pageIds.landingPage -> LandingPage.main,
-    pageIds.taxCalc -> example.ScalaJSExample.main,
-    pageIds.wikiExamle -> WIKI.main
+    pageIds.taxCalc -> example.ScalaJSExample.main
   )
 
   lazy val navigation = div(
@@ -68,8 +66,6 @@ object Main extends js.JSApp {
     }
   )
 
-
-
   val contentPage = div(
     id := "contentPage",
     model.page
@@ -79,7 +75,6 @@ object Main extends js.JSApp {
     navigation,
     contentPage
   ).render
-
 
   implicit def ctx: Owner = Ctx.Owner.safe()
 
