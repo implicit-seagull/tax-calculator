@@ -38,7 +38,13 @@ object ScalaJSExample {
     }
 
     val earningAfterTaxDeductions = Rx {
-      moneyInputField() * tax *  0.04
+      if(ir35CheckBoxIn()){
+        moneyInputField() * tax * 0.8
+      }
+      else {
+        moneyInputField() * tax
+      }
+
     }
 
     val stage1 = Rx {
