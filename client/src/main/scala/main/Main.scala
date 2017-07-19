@@ -41,8 +41,7 @@ object Main extends js.JSApp {
   object pageIds {
     val landingPage = "landing-page"
     val taxCalc = "tax-calculator"
-    val wikiExamle = "wiki-example"
-    val all = List(landingPage, taxCalc, wikiExamle)
+    val all = List(landingPage, taxCalc)
   }
 
   lazy val pageContents = Map(
