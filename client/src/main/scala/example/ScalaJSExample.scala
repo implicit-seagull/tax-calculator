@@ -41,7 +41,7 @@ object ScalaJSExample extends js.JSApp {
 
     object view {
 
-      val meneyInput = input(placeholder := "put money here").render
+      val meneyInput = input(placeholder := "0").render
 
       meneyInput.onkeyup = (x: Any) => {
         dom.console.log("wordbox on keyup ...")
@@ -51,8 +51,11 @@ object ScalaJSExample extends js.JSApp {
 //
 
       val expenses = input(placeholder := "expenses").render
+      //todo get values right
       val taxToPayOutput = input(readonly, value := model.out)
-
+      val corporationTax = input(readonly, value := model.out)
+      val nationalInsurance = input(readonly, value := model.out)
+      val personalTax = input(readonly, value := model.out)
       val calc = div(
         p("tax calc"),
         meneyInput,
@@ -61,7 +64,13 @@ object ScalaJSExample extends js.JSApp {
        p("IR35",input(`type`:= "checkbox")),
         div(
           p("you have to pay taxes:"),
-          taxToPayOutput
+          taxToPayOutput,
+          p("Corporation Tax"),
+          corporationTax,
+          p("nationalInsurance"),
+          nationalInsurance,
+          p("personalTax"),
+          personalTax
         )
       )
 
