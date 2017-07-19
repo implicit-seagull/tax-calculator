@@ -24,15 +24,8 @@ object ScalaJSExample {
   object model {
     val moneyInputField = Var(0.0)
 
-    object stage0 {
-      val tax = Rx {
-        moneyInputField() *  0.2
-      }
-      val takeHome = Rx {
-        moneyInputField() - tax()
-      }
-
-    }
+    val tax0 = Rx {moneyInputField() *  0.2}
+    val takeHome0 = Rx {moneyInputField() - tax0()}
 
     val expencesInputField = Var(0.0)
     val ir35CheckBoxIn = Var(false)
@@ -150,11 +143,11 @@ object ScalaJSExample {
           questionMark
         ),
         div(
-          input(readonly, value := model.stage0.tax, cls := "output"),
+          input(readonly, value := model.tax0, cls := "output"),
           span(cls := "label-for-input", "Your initial tax"), questionMark
         ),
         div(
-          input(readonly, value := model.stage0.takeHome, cls := "output"),
+          input(readonly, value := model.takeHome0, cls := "output"),
           span(cls := "label-for-input", "Your initial take home "), questionMark
         )
 
