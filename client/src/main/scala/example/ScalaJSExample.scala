@@ -1,7 +1,7 @@
 package example
 
 import org.scalajs.dom
-import org.scalajs.dom.html.{Input, Pre}
+import org.scalajs.dom.html.{ Input, Pre }
 import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
@@ -11,8 +11,8 @@ import shared.SharedMessages
 import scala.scalajs.js
 import scalatags.JsDom
 import scalatags.JsDom.TypedTag
-import scalatags.JsDom.all.{p, _}
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.JsDom.all.{ p, _ }
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import rx._
 import wiki.WIKI
@@ -23,9 +23,18 @@ object ScalaJSExample {
 
   object model {
     val moneyInputField = Var(0.0)
-    val expencesInputField = Var(0.0)
-    val tax = 0.80
 
+    object stage0 {
+      val tax = Rx {
+        moneyInputField() *  0.2
+      }
+      val takeHome = Rx {
+        moneyInputField() - tax()
+      }
+
+    }
+
+    val expencesInputField = Var(0.0)
     val ir35CheckBoxIn = Var(false)
     val marriageCheckBoxIn = Var(false)
     val pensionReliefCheckboxIn = Var(false)
@@ -35,14 +44,14 @@ object ScalaJSExample {
     val expensesInput = Var(0.0)
 
     val earningAfterIncomeTax = Rx {
-      moneyInputField() * tax
+      moneyInputField() * 0.80
     }
 
     val earningAfterTaxDeductions = Rx {
       if (ir35CheckBoxIn()) {
-        moneyInputField() * tax * 0.8
+        moneyInputField() * 0.80 * 0.8
       } else {
-        moneyInputField() * tax
+        moneyInputField() * 0.80
       }
 
     }
@@ -133,7 +142,7 @@ object ScalaJSExample {
         h4("Income/Earnings"),
         div(
           {
-            val i = input(placeholder := "put money here", cls:= "the-input").render
+            val i = input(placeholder := "put money here", cls := "the-input").render
             i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
             i
           },
@@ -141,9 +150,12 @@ object ScalaJSExample {
           questionMark
         ),
         div(
-          input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
-          span(cls := "label-for-input", "Initial earnings after income tax deductions"),
-          questionMark
+          input(readonly, value := model.stage0.tax, cls := "output"),
+          span(cls := "label-for-input", "Your initial tax"), questionMark
+        ),
+        div(
+          input(readonly, value := model.stage0.takeHome, cls := "output"),
+          span(cls := "label-for-input", "Your initial take home "), questionMark
         )
 
       ),

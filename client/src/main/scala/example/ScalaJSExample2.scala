@@ -18,16 +18,14 @@ object ScalaJSExample2 {
     val stage1 = Rx {
       if (ir35CheckBoxIn()) {
         moneyInputField() * 0.95
-      } else if(marriageCheckBoxIn()) {
+      } else if (marriageCheckBoxIn()) {
         moneyInputField() * 0.8
-      }
-      else {
+      } else {
         moneyInputField()
       }
     }
 
-
-    val takeHomeMoney =  Rx {
+    val takeHomeMoney = Rx {
       stage1()
     }
 
@@ -60,8 +58,8 @@ object ScalaJSExample2 {
       ),
       span(
         style := "display: inline",
-        WIKI.main("5% rate", label(WIKI.infoItem("5% rate", WIKI.wikiservice.keys.IR35), ir35InputField).render),
-        WIKI.main("20% rate", label(WIKI.infoItem("20% rate", WIKI.wikiservice.keys.marriageAllowance), marriageInputField).render)
+        WIKI.main("Reduced Rate", label(WIKI.infoItem("Reduced Rate", WIKI.wikiservice.keys.reducedRate), ir35InputField).render),
+        WIKI.main("Standard Rate", label(WIKI.infoItem("Standard Rate", WIKI.wikiservice.keys.standardRate), marriageInputField).render)
       ),
       div(
         //  p("you have to pay taxes:"),
@@ -75,9 +73,8 @@ object ScalaJSExample2 {
 
           div(
             cls := "debug-pane",
-            hidden,
-            p("5% rate = ", model.ir35CheckBoxIn.map(_.toString())),
-            p("20% rate = ", model.marriageCheckBoxIn.map(_.toString()))
+            p("reduced rate = ", model.ir35CheckBoxIn.map(_.toString())),
+            p("standard rate = ", model.marriageCheckBoxIn.map(_.toString()))
           )
         )
       )
