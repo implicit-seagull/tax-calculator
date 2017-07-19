@@ -41,21 +41,34 @@ object ScalaJSExample {
 
     val meneyInputField: Input = {
       val i = input(placeholder := "put money here").render
-      i.onkeyup = (x: Any) => {
-        model.moneyInputField() = i.value.toDouble
-      }
+      i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
       i
     }
 
     val ir35InputField: Input = {
       val i = input(`type` := "checkbox").render
-      i.onchange = (x: Any) => {
-        model.ir35CheckBoxIn() = i.checked
-      }
+      i.onchange = (x: Any) => model.ir35CheckBoxIn() = i.checked
       i
     }
 
-    //
+    val marriageInputField: Input = {
+      val i = input(`type` := "checkbox").render
+      i.onchange = (x: Any) => model.marriageCheckBoxIn() = i.checked
+      i
+    }
+
+    val pensionReliefInputField: Input = {
+      val i = input(`type` := "checkbox").render
+      i.onchange = (x: Any) => model.pensionReliefCheckboxIn() = i.checked
+      i
+    }
+
+    val maintenanceInputField: Input = {
+      val i = input(`type` := "checkbox").render
+      i.onchange = (x: Any) => model.maintenanceReliefeChecboxIn() = i.checked
+      i
+    }
+
 
     val earningsAfterInitialTax = input().render
     //todo get values right
@@ -74,9 +87,9 @@ object ScalaJSExample {
       span(
         style := "display: inline",
         WIKI.main("IR35", label(WIKI.infoItem("IR35", WIKI.wikiservice.keys.IR35), ir35InputField).render),
-        WIKI.main("Marriage allowance", label(WIKI.infoItem("Marriage allowance", WIKI.wikiservice.keys.marriageAllowance), input(`type` := "checkbox")).render),
-        WIKI.main("Pension Relief", label(WIKI.infoItem("Pension Relief", WIKI.wikiservice.keys.pensionRelief), input(`type` := "checkbox")).render),
-        WIKI.main("Maintenance Relief", label(WIKI.infoItem("Maintenance relief", WIKI.wikiservice.keys.maintenanceRelief), input(`type` := "checkbox")).render)
+        WIKI.main("Marriage allowance", label(WIKI.infoItem("Marriage allowance", WIKI.wikiservice.keys.marriageAllowance), marriageInputField).render),
+        WIKI.main("Pension Relief", label(WIKI.infoItem("Pension Relief", WIKI.wikiservice.keys.pensionRelief), pensionReliefInputField).render),
+        WIKI.main("Maintenance Relief", label(WIKI.infoItem("Maintenance relief", WIKI.wikiservice.keys.maintenanceRelief), maintenanceInputField).render)
       ),
       div(
         //  p("you have to pay taxes:"),
@@ -94,9 +107,11 @@ object ScalaJSExample {
 
           div(
             cls := "debug-pane",
-            hidden, //comment it to hide debug
+            //hidden, //comment it to hide debug
             p("ir35 = ", model.ir35CheckBoxIn.map(_.toString())),
-            p("married = ", model.marriageCheckBoxIn.map(_.toString()))
+            p("married = ", model.marriageCheckBoxIn.map(_.toString())),
+              p("pension = ", model.pensionReliefCheckboxIn.map(_.toString())),
+              p("maintenanceRelief = ", model.maintenanceReliefeChecboxIn.map(_.toString()))
           )
         )
       )
