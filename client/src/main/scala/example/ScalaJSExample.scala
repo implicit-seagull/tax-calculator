@@ -1,7 +1,9 @@
 package example
 
+import example.TextAreaStats.Model
 import org.scalajs.dom
 import org.scalajs.dom.html.Pre
+import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
 import rx._
@@ -13,7 +15,10 @@ import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
 import scalatags.stylesheet.{Cls, StyleSheet}
+import framework.Framework._
+import rx._
 
+import scalatags.JsDom.all._
 
 object ScalaJSExample extends js.JSApp {
 
@@ -24,11 +29,51 @@ object ScalaJSExample extends js.JSApp {
 
     dom.document.getElementById("example1").innerHTML = ""
     dom.document.getElementById("example1").appendChild(
-      div(
-        p("tax calc"),
-        input( placeholder := "put money here")
-      ).render
+      view.calc.render
     )
+
+    object logic {
+
+      model.out.foreach{ x=>
+        dom.console.log(x)
+      }
+    }
+
+    object view {
+
+      val meneyInput = input(placeholder := "put money here").render
+
+      meneyInput.onkeyup = (x: Any) => {
+        dom.console.log("wordbox on keyup ...")
+        model.in() = meneyInput.value.toDouble
+
+      }
+//
+
+
+      val taxToPayOutput = input(readonly, value := model.out)
+
+      val calc = div(
+        p("tax calc"),
+        meneyInput,
+        div(
+          p("you have to pay taxes:"),
+          taxToPayOutput
+        )
+      )
+
+    }
+
+
+
+    object model {
+      val in = Var(0.0)
+      val tax = 0.19
+      val out = Rx { in() * tax }
+    }
+
+
+
   }
 
 
@@ -39,10 +84,7 @@ object ScalaJSExample extends js.JSApp {
 
 object TextAreaStats {
 
-  import framework.Framework._
-  import rx._
 
-  import scalatags.JsDom.all._
 
   lazy val render: dom.Element = {
     Model.words.map(x => dom.console.log(s"words changed: $x"))
