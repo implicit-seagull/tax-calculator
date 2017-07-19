@@ -23,7 +23,12 @@ object ScalaJSExample extends js.JSApp {
     dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
 
     dom.document.getElementById("example1").innerHTML = ""
-    dom.document.getElementById("example1").appendChild(TextAreaStats.render)
+    dom.document.getElementById("example1").appendChild(
+      div(
+        p("tax calc"),
+        input( placeholder := "put money here")
+      ).render
+    )
   }
 
 
