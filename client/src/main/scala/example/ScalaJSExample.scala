@@ -130,8 +130,8 @@ object ScalaJSExample {
             //hidden, //comment it to hide debug
             p("ir35 = ", model.ir35CheckBoxIn.map(_.toString())),
             p("married = ", model.marriageCheckBoxIn.map(_.toString())),
-              p("pension = ", model.pensionReliefCheckboxIn.map(_.toString())),
-              p("maintenanceRelief = ", model.maintenanceReliefeChecboxIn.map(_.toString()))
+            p("pension = ", model.pensionReliefCheckboxIn.map(_.toString())),
+            p("maintenanceRelief = ", model.maintenanceReliefeChecboxIn.map(_.toString()))
           )
         )
       )
