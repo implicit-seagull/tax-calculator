@@ -14,7 +14,7 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import rx._
 import wiki.WIKI
@@ -72,15 +72,20 @@ object ScalaJSExample extends js.JSApp {
           label("Pension Relief", input(`type` := "checkbox")),
           label("Maintenance relief", input(`type` := "checkbox"))
         ),
-        //  p("you have to pay taxes:"),
-        //  taxToPayOutput,
-        p(""),
-        span(
-          style := "display: inline",
-          label("Self-Employed/Contractor expenses amount",
-            corporationTax), label
-          ("Earnings After Tax Deductions",
-            nationalInsurance)
+        div(
+          //  p("you have to pay taxes:"),
+          //  taxToPayOutput,
+          span(
+            style := "display: inline",
+            h1(
+              "Self-Employed/Contractor expenses amount",
+              corporationTax
+            ),
+            h2(
+              "Earnings After Tax Deductions",
+              nationalInsurance
+            )
+          )
         )
       )
 
