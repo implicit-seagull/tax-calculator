@@ -23,18 +23,6 @@ import scalatags.JsDom.all._
 
 object ScalaJSExample  {
 
-//
-//    dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
-//
-//    dom.document.getElementById("example1").innerHTML = ""
-//    dom.document.getElementById("example1").appendChild(
-//      view.calc.render
-//    )
-
-//    dom.document.getElementById("wikiDemo").appendChild(
-//      WIKI.main.render
-//    )
-
     object logic {
 
       model.incomeTax.foreach { x =>
@@ -71,15 +59,20 @@ object ScalaJSExample  {
           label("Pension Relief", input(`type` := "checkbox")),
           label("Maintenance relief", input(`type` := "checkbox"))
         ),
-        //  p("you have to pay taxes:"),
-        //  taxToPayOutput,
-        p(""),
-        span(
-          style := "display: inline",
-          label("Self-Employed/Contractor expenses amount",
-            corporationTax), label
-          ("Earnings After Tax Deductions",
-            nationalInsurance)
+        div(
+          //  p("you have to pay taxes:"),
+          //  taxToPayOutput,
+          span(
+            style := "display: inline",
+            h1(
+              "Self-Employed/Contractor expenses amount",
+              corporationTax
+            ),
+            h2(
+              "Earnings After Tax Deductions",
+              nationalInsurance
+            )
+          )
         )
       )
 
