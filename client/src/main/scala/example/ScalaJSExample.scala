@@ -72,16 +72,16 @@ object ScalaJSExample extends js.JSApp {
           label("Pension Relief", input(`type` := "checkbox")),
           label("Maintenance relief", input(`type` := "checkbox"))
         ),
-        div(
         //  p("you have to pay taxes:"),
         //  taxToPayOutput,
-          span(
-            style := "display: inline",
-          h1("Self-Employed/Contractor expenses amount",
-          corporationTax),
-            h2("Earnings After Tax Deductions",
-          nationalInsurance)
-        ))
+        p(""),
+        span(
+          style := "display: inline",
+          label("Self-Employed/Contractor expenses amount",
+            corporationTax), label
+          ("Earnings After Tax Deductions",
+            nationalInsurance)
+        )
       )
 
     }
