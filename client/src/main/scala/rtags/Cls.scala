@@ -30,7 +30,6 @@ object Cls {
     def apply(t: Builder, v: String*)
   }
 
-
   object ClassValue {
 
     private val createEmptyClasstag = new GenericAttr[String]
@@ -49,7 +48,7 @@ object Cls {
         //}
         //else ()
 
-        v.foreach{ x =>
+        v.foreach { x =>
           t.classList.add(x)
         }
       }

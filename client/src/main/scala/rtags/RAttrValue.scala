@@ -5,7 +5,6 @@ import rx._
 
 import scalatags.JsDom.all._
 
-
 trait RAttrValue {
 
   implicit def RxDynamicAttrValue[T: AttrValue](implicit ctx: Ctx.Owner) = new AttrValue[Rx.Dynamic[T]] {

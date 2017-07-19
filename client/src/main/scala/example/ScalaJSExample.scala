@@ -14,14 +14,14 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import rx._
+import wiki.WIKI
 
 import scalatags.JsDom.all._
 
 object ScalaJSExample extends js.JSApp {
-
 
   def main(): Unit = {
 
@@ -32,9 +32,13 @@ object ScalaJSExample extends js.JSApp {
       view.calc.render
     )
 
+    dom.document.getElementById("wikiDemo").appendChild(
+      WIKI.main.render
+    )
+
     object logic {
 
-      model.out.foreach{ x=>
+      model.out.foreach { x =>
         dom.console.log(x)
       }
     }
@@ -48,7 +52,7 @@ object ScalaJSExample extends js.JSApp {
         model.in() = meneyInput.value.toDouble
 
       }
-//
+      //
 
       val expenses = input(placeholder := "expenses").render
       //todo get values right
@@ -61,7 +65,7 @@ object ScalaJSExample extends js.JSApp {
         meneyInput,
         p("expenses"),
         expenses,
-       p("IR35",input(`type`:= "checkbox")),
+        p("IR35", input(`type` := "checkbox")),
         div(
           p("you have to pay taxes:"),
           taxToPayOutput,
@@ -76,27 +80,19 @@ object ScalaJSExample extends js.JSApp {
 
     }
 
-
-
     object model {
       val in = Var(0.0)
       val tax = 0.19
       val out = Rx { in() * tax }
     }
 
-
-
   }
-
 
   implicit def ctx: Owner = Ctx.Owner.safe()
 
 }
 
-
 object TextAreaStats {
-
-
 
   lazy val render: dom.Element = {
     Model.words.map(x => dom.console.log(s"words changed: $x"))
@@ -125,7 +121,7 @@ object TextAreaStats {
 
     class Color(jsName: String, cssName: String) extends Style(jsName, cssName)
 
-    object Color extends Color("color", "color"){
+    object Color extends Color("color", "color") {
       lazy val A = this := "#382865"
       lazy val B = this := "#FF2865"
       lazy val C: StylePair[dom.Element, String] = this := "#38CC65"
@@ -148,7 +144,7 @@ object TextAreaStats {
     lazy val mainDiv = div(
       wordbox,
       ul(
-        li(span("characters:", raw("&nbsp;"), iPre(chars).apply(color := chars.map(x => if(x == 0) (color.red).v else "inherit")))),
+        li(span("characters:", raw("&nbsp;"), iPre(chars).apply(color := chars.map(x => if (x == 0) (color.red).v else "inherit")))),
         li(span("characters:", raw("&nbsp;"), iPre(chars).apply(Color.A))),
         li(span("characters:", raw("&nbsp;"), iPre(chars).apply(Color.D))),
         li(span("words:", words)),
@@ -161,12 +157,9 @@ object TextAreaStats {
 
     ).render
 
-
   }
 
 }
-
-
 
 object SimpleSS extends StyleSheet {
   val x: Cls = cls(

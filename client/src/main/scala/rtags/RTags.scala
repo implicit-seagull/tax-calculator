@@ -4,5 +4,3 @@ trait RTags extends RAttrValue
 
 object RTags extends RTags
 
-
-

@@ -5,7 +5,6 @@ import rx._
 
 import scalatags.JsDom.all._
 
-
 trait RStyleValue {
 
   implicit def RxDynamicStyleValue[T: StyleValue](implicit ctx: Ctx.Owner) = new StyleValue[Rx.Dynamic[T]] {
