@@ -24,6 +24,7 @@ object ScalaJSExample {
 
   object model {
     val moneyInputField = Var(0.0)
+    val expencesInputField = Var(0.0)
     val tax = 0.80
 
     val ir35CheckBoxIn = Var(false)
@@ -80,7 +81,7 @@ object ScalaJSExample {
     }
 
     val takeHomeMoney =  Rx {
-      stage4()
+      stage4() + expencesInputField()
     }
 
   }
@@ -117,6 +118,11 @@ object ScalaJSExample {
       i.onchange = (x: Any) => model.maintenanceReliefeChecboxIn() = i.checked
       i
     }
+    val expensivesInputField: Input = {
+      val i = input(placeholder := "put money here").render
+      i.onkeyup = (x: Any) => model.expencesInputField() = i.value.toDouble
+      i
+    }
 
     val calc = div(
       p("Income/Earnings"),
@@ -137,11 +143,7 @@ object ScalaJSExample {
         span(
           style := "display: inline",
           p(
-            "Self-Employed/Contractor expenses amount", {
-              val i = input(placeholder := "put money here").render
-              i.onkeyup = (x: Any) => model.expensesInput() = i.value.toDouble
-              i
-            }
+            "Self-Employed/Contractor expenses amount", expensivesInputField
           ),
           p(
             "Earnings After Tax Deductions",
