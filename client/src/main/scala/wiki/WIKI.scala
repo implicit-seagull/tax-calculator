@@ -23,26 +23,25 @@ object WIKI {
 
   object wikiservice {
     object keys {
-      val hello = "hello"
       val IR35 = "IR35"
       val marriageAllowance = "marriageAllowance"
       val pensionRelief = "pension"
       val NI = "NI"
-      val maintenanceRelief = "IncomeTax"
+      val maintenanceRelief = "maintenanceRelief"
+      val incomeTax = "incomeTax"
     }
 
     val keystore = Map[String, String](
-      keys.hello -> "Hello is a greeting word used to say you know hi but in slighty longer way ...",
-      keys.maintenanceRelief -> " If you are providing maintenance payments to an ex-spouse or former civil partner or for children under 21, you can claim back 10% of the maintenance payments up to £326",
+      keys.maintenanceRelief -> "Maintenance Relief :  If you are providing maintenance payments to an ex-spouse or former civil partner or for children under 21, you can claim back 10% of the maintenance payments up to £326",
       keys.IR35 -> "Pay 25% more tax if you’re inside IR35",
-      keys.marriageAllowance -> "Allows you to transfer up to £1,150 from your tax allowance to your spouse if their earnings are higher than yours. Reduces their tax by £230 pounds for that year.   ",
-      keys.pensionRelief -> "20% added to your pension pot after your employer claims the relief. This is only if they take pension contributions before tax.  (Only applies to tax rates of above 20%) At 40% tax you get 20% relief. At 45% tax you get 25% relief. "
+      keys.marriageAllowance -> "Marriage allowance : Allows you to transfer up to £1,150 from your tax allowance to your spouse if their earnings are higher than yours. Reduces their tax by £230 pounds for that year.   ",
+      keys.pensionRelief -> "Pension Relief : 20% added to your pension pot after your employer claims the relief. This is only if they take pension contributions before tax.  (Only applies to tax rates of above 20%) At 40% tax you get 20% relief. At 45% tax you get 25% relief. "
     )
-
   }
 
   val info = Var("")
-  val condition = Rx { info() == "" }
+  val condition: Rx[Boolean] = Rx { info() == "" }
+  val condition2: String => Rx[Boolean] = str => Rx { info().contains(str) }
 
   def infoItem(textToBeDisplayed: String, wikiKey: String) = {
 
@@ -51,7 +50,7 @@ object WIKI {
       textToBeDisplayed
     ).render
 
-    tag.onmouseover = (x: Any) => {
+    tag.onmouseover = (x: dom.Event) => {
       info() = wikiservice.keystore(wikiKey)
     }
 
@@ -62,14 +61,9 @@ object WIKI {
     tag
   }
 
-  //  span(id := thi, `class` := "glyphicon glyphicon-info-sign"),
-
-  val content = p(
-    infoItem("Hello", wikiservice.keys.hello), " you are paying taxs"
-  )
-
   def infoPanel(key: String)(implicit ctx: Ctx.Owner) = Rx {
-    if (!condition()) {
+    dom.console.log(key)
+    if (!condition() && condition2(key)()) {
       div(
         id := key,
         span(`class` := "glyphicon glyphicon-info-sign"),
@@ -78,7 +72,7 @@ object WIKI {
     } else {
       div(
         id := key,
-        label(info)
+        label("")
       )
     }
   }

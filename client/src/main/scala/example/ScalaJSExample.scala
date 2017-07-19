@@ -1,7 +1,7 @@
 package example
 
 import org.scalajs.dom
-import org.scalajs.dom.html.{Input, Pre}
+import org.scalajs.dom.html.{ Input, Pre }
 import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
@@ -13,7 +13,7 @@ import scalatags.JsDom
 import scalatags.JsDom.TypedTag
 import scalatags.JsDom.all._
 import scalatags.generic.StylePair
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import rx._
 import wiki.WIKI
@@ -38,10 +38,9 @@ object ScalaJSExample {
     }
 
     val earningAfterTaxDeductions = Rx {
-      if(ir35CheckBoxIn()){
+      if (ir35CheckBoxIn()) {
         moneyInputField() * tax * 0.8
-      }
-      else {
+      } else {
         moneyInputField() * tax
       }
 
@@ -50,27 +49,24 @@ object ScalaJSExample {
     val stage1 = Rx {
       //some computations
       var taxAfterI = moneyInputField() * 0.8
-      if(ir35CheckBoxIn()) {
+      if (ir35CheckBoxIn()) {
         moneyInputField() * 0.8 * 0.8
-      }
-      else {
+      } else {
         moneyInputField() * 0.8
       }
     }
 
     val stage2 = Rx {
-      if(marriageCheckBoxIn()) {
+      if (marriageCheckBoxIn()) {
         stage1() + 231.0
-      }
-      else stage1()
+      } else stage1()
     }
 
-    val taxToPayOutput =  Rx {
+    val taxToPayOutput = Rx {
       stage2()
     }
 
   }
-
 
   object view {
 
@@ -108,7 +104,7 @@ object ScalaJSExample {
       p("Income/Earnings"),
       meneyInputField,
       p("Earnings after income tax deductions and NI"),
-      input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
+      WIKI.main("Income Tax", WIKI.infoItem("Income Tax", WIKI.wikiservice.keys.)input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
       p("put some more info about your profile:"),
       span(
         style := "display: inline",
@@ -147,7 +143,6 @@ object ScalaJSExample {
     )
 
   }
-
 
   val main = view.calc.render
 
