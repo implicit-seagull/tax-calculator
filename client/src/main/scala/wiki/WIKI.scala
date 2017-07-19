@@ -29,13 +29,15 @@ object WIKI {
       val NI = "NI"
       val maintenanceRelief = "maintenanceRelief"
       val incomeTax = "incomeTax"
+      val charityRelief = "charityRelief"
     }
 
     val keystore = Map[String, String](
       keys.maintenanceRelief -> "Maintenance Relief :  If you are providing maintenance payments to an ex-spouse or former civil partner or for children under 21, you can claim back 10% of the maintenance payments up to £326",
       keys.IR35 -> "Pay 25% more tax if you’re inside IR35",
       keys.marriageAllowance -> "Marriage allowance : Allows you to transfer up to £1,150 from your tax allowance to your spouse if their earnings are higher than yours. Reduces their tax by £230 pounds for that year.   ",
-      keys.pensionRelief -> "Pension Relief : 20% added to your pension pot after your employer claims the relief. This is only if they take pension contributions before tax.  (Only applies to tax rates of above 20%) At 40% tax you get 20% relief. At 45% tax you get 25% relief. "
+      keys.pensionRelief -> "Pension Relief : 20% added to your pension pot after your employer claims the relief. This is only if they take pension contributions before tax.  (Only applies to tax rates of above 20%) At 40% tax you get 20% relief. At 45% tax you get 25% relief. ",
+      keys.charityRelief -> "TODO: .... "
     )
   }
 

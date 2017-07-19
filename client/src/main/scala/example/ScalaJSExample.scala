@@ -31,6 +31,7 @@ object ScalaJSExample {
     val marriageCheckBoxIn = Var(false)
     val pensionReliefCheckboxIn = Var(false)
     val maintenanceReliefeChecboxIn = Var(false)
+    val charityReliefeChecboxIn = Var(false)
 
     val expensesInput = Var(0.0)
 
@@ -77,8 +78,16 @@ object ScalaJSExample {
       else stage3()
     }
 
+    val stage5 = Rx {
+      if(charityReliefeChecboxIn()) {
+        stage4() + 68
+      }
+      else stage4()
+    }
+
+
     val takeHomeMoney =  Rx {
-      stage4() + expencesInputField()
+      stage5() + expencesInputField()
     }
 
   }
@@ -108,6 +117,12 @@ object ScalaJSExample {
       i.onchange = (x: Any) => model.maintenanceReliefeChecboxIn() = i.checked
       i
     }
+
+    val charityReliefInputField: Input = {
+      val i = input(`type` := "checkbox").render
+      i.onchange = (x: Any) => model.charityReliefeChecboxIn() = i.checked
+      i
+    }
     val expensivesInputField: Input = {
       val i = input(placeholder := "put money here").render
       i.onkeyup = (x: Any) => model.expencesInputField() = i.value.toDouble
@@ -133,7 +148,8 @@ object ScalaJSExample {
         WIKI.main("IR35", label(WIKI.infoItem("IR35", WIKI.wikiservice.keys.IR35), ir35InputField).render),
         WIKI.main("Marriage allowance", label(WIKI.infoItem("Marriage allowance", WIKI.wikiservice.keys.marriageAllowance), marriageInputField).render),
         WIKI.main("Pension Relief", label(WIKI.infoItem("Pension Relief", WIKI.wikiservice.keys.pensionRelief), pensionReliefInputField).render),
-        WIKI.main("Maintenance Relief", label(WIKI.infoItem("Maintenance relief", WIKI.wikiservice.keys.maintenanceRelief), maintenanceInputField).render)
+        WIKI.main("Maintenance Relief", label(WIKI.infoItem("Maintenance relief", WIKI.wikiservice.keys.maintenanceRelief), maintenanceInputField).render),
+        WIKI.main("Maintenance Relief", label(WIKI.infoItem("Charity relief", WIKI.wikiservice.keys.charityRelief), charityReliefInputField).render)
       ),
       div(
         //  p("you have to pay taxes:"),
