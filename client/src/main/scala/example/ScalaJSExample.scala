@@ -89,12 +89,6 @@ object ScalaJSExample {
 
   object view {
 
-    val meneyInputField: Input = {
-      val i = input(placeholder := "put money here").render
-      i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
-      i
-    }
-
     val ir35InputField: Input = {
       val i = input(`type` := "checkbox").render
       i.onchange = (x: Any) => model.ir35CheckBoxIn() = i.checked
@@ -125,8 +119,16 @@ object ScalaJSExample {
     }
 
     val calc = div(
-      p("Income/Earnings"),
-      meneyInputField,
+      h1("Tax Calculator"),
+      p(
+        cls := "group",
+        h3("Income/Earnings"),
+        {
+          val i = input(placeholder := "put money here").render
+          i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
+          i
+        }
+      ),
       p("Earnings after income tax deductions and NI"),
       input(readonly, value := model.earningAfterIncomeTax, cls := "output"),
       p("put some more info about your profile:"),
