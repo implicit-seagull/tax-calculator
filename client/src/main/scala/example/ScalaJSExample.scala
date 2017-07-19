@@ -1,7 +1,7 @@
 package example
 
 import org.scalajs.dom
-import org.scalajs.dom.html.{Input, Pre}
+import org.scalajs.dom.html.{ Input, Pre }
 import org.scalajs.dom.raw.KeyboardEvent
 import rx.Ctx.Owner
 import rx.Rx.Dynamic
@@ -11,8 +11,8 @@ import shared.SharedMessages
 import scala.scalajs.js
 import scalatags.JsDom
 import scalatags.JsDom.TypedTag
-import scalatags.JsDom.all.{p, _}
-import scalatags.stylesheet.{Cls, StyleSheet}
+import scalatags.JsDom.all.{ p, _ }
+import scalatags.stylesheet.{ Cls, StyleSheet }
 import framework.Framework._
 import rx._
 import wiki.WIKI
@@ -133,7 +133,7 @@ object ScalaJSExample {
         h4("Income/Earnings"),
         div(
           {
-            val i = input(placeholder := "put money here", cls:= "the-input").render
+            val i = input(placeholder := "put money here", cls := "the-input").render
             i.onkeyup = (x: Any) => model.moneyInputField() = i.value.toDouble
             i
           },

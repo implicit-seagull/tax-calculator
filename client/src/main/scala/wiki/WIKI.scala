@@ -32,17 +32,21 @@ object WIKI {
       val incomeTax = "Income Tax"
       val expenses = "Self-Employed/Contractor expenses amount"
       val takeHomePay = "Take Home Pay"
+      val reducedRate = "Reduced Rate"
+      val standardRate = "Standard Rate"
     }
 
     val keystore = Map[String, String](
-      keys.maintenanceRelief -> "Maintenance Relief :  If you are providing maintenance payments to an ex-spouse or former civil partner or for children under 21, you can claim back 10% of the maintenance payments up to £326",
+      keys.maintenanceRelief -> "Maintenance Relief : If you provide maintenance payment to a former partner or spouse, or for children under 21, you can claim 10% of the total payments up to £326",
       keys.IR35 -> "Pay 25% more tax if you’re inside IR35",
-      keys.marriageAllowance -> "Marriage allowance : Allows you to transfer up to £1,150 from your tax allowance to your spouse if their earnings are higher than yours. Reduces their tax by £230 pounds for that year.   ",
-      keys.pensionRelief -> "Pension Relief : 20% added to your pension pot after your employer claims the relief. This is only if they take pension contributions before tax.  (Only applies to tax rates of above 20%) At 40% tax you get 20% relief. At 45% tax you get 25% relief. ",
+      keys.marriageAllowance -> "Marriage allowance : Tick this box if you spouse has given you a portion of their income allowance. Reducing your tax bill up to £230 per year. ",
+      keys.pensionRelief -> "Pension Relief :  Up to 20% of your income tax amount can be reclaimed if your pensions contribution was taken before tax has been applied to your income.  ",
       keys.charityRelief -> "Charity Relief : tick this if you have donated to charity this year,  this allows you to reclaim the difference between the donated amount and what the charity received in relief. ",
       keys.incomeTax -> "Income Tax : tax paid on your income. The standard tax rate is 20%. This increases to 40% with income over £45,000 pounds and 45% with income over £150,000. ",
       keys.expenses -> "if you are self-employed/contractor, you can claim work related expenses and remove them from your tax bill. This include, but are not limited to travel costs, office, staff salaries and marketing costs. ",
-      keys.takeHomePay -> "Take Home Pay"
+      keys.takeHomePay -> "Take Home Pay : This field shows your income after tax relief and other tax deductions on top of income tax deductions. ",
+      keys.reducedRate -> "Reduced Rate : the reduced rate is paid on goods sold as services, utilities",
+      keys.standardRate -> "Standard Rate : the standard rate of VAT at 20%"
     )
   }
 

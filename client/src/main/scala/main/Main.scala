@@ -45,9 +45,9 @@ object Main extends js.JSApp {
   }
 
   lazy val pageContents = Map(
-     pageIds.landingPage -> LandingPage.main,
-     pageIds.taxCalc -> example.ScalaJSExample.main,
-     pageIds.vatCalc -> example.ScalaJSExample2.main
+    pageIds.landingPage -> LandingPage.main,
+    pageIds.taxCalc -> example.ScalaJSExample.main,
+    pageIds.vatCalc -> example.ScalaJSExample2.main
   )
 
   lazy val navigation = Rx {
