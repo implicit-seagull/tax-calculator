@@ -49,6 +49,7 @@ object ScalaJSExample {
 
     val stage1 = Rx {
       //some computations
+      var taxAfterI = moneyInputField() * 0.8
       if(ir35CheckBoxIn()) {
         moneyInputField() * 0.8 * 0.8
       }
@@ -57,8 +58,15 @@ object ScalaJSExample {
       }
     }
 
+    val stage2 = Rx {
+      if(marriageCheckBoxIn()) {
+        stage1() + 231.0
+      }
+      else stage1()
+    }
+
     val taxToPayOutput =  Rx {
-      stage1()
+      stage2()
     }
 
   }
@@ -96,10 +104,6 @@ object ScalaJSExample {
       i
     }
 
-    //todo get values right
-    val taxToPayOutput = input(readonly, value := model.earningAfterTaxDeductions)
-    val corporationTax = input(readonly, value := model.earningAfterTaxDeductions)
-
     val calc = div(
       p("Income/Earnings"),
       meneyInputField,
@@ -127,7 +131,7 @@ object ScalaJSExample {
           ),
           p(
             "Earnings After Tax Deductions",
-            input(readonly, value := model.earningAfterTaxDeductions, cls := "output")
+            input(readonly, value := model.taxToPayOutput, cls := "output")
           ),
 
           div(
