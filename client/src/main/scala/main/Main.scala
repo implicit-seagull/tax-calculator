@@ -53,13 +53,15 @@ object Main extends js.JSApp {
       id := "navigation",
       pageIds.all.map { pageId =>
         val menuItem = if ( pageId == model.selectedMenu()) {
-          li(
-            cls := "selectedMenu",
-            pageId
+          li(cls := "btn-group button", button(
+            pageId)
           ).render
         }
         else {
-          li(pageId).render
+          li(cls := "btn-group button", button(
+            cls := "btn-group",
+            pageId)
+          ).render
         }
 
 
