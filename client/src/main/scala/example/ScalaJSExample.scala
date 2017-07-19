@@ -31,9 +31,24 @@ object ScalaJSExample {
     val pensionReliefCheckboxIn = Var(false)
     val maintenanceReliefeChecboxIn = Var(false)
 
-    val incomeTax = Rx {
+    val earningAfterIncomeTax = Rx {
       moneyInputField() * tax
     }
+
+    val stage1 = Rx {
+      //some computations
+      if(ir35CheckBoxIn()) {
+        moneyInputField() * 0.8 * 0.8
+      }
+      else {
+        moneyInputField() * 0.8
+      }
+    }
+
+    val taxToPayOutput =  Rx {
+      stage1()
+    }
+
   }
 
 
@@ -70,11 +85,11 @@ object ScalaJSExample {
     }
 
 
-    val earningsAfterInitialTax = input().render
+    val earningsAfterInitialTax = input(readonly, value := model.earningAfterIncomeTax)
     //todo get values right
-    val taxToPayOutput = input(readonly, value := model.incomeTax)
-    val corporationTax = input(readonly, value := model.incomeTax)
-    val nationalInsurance = input(readonly, value := model.incomeTax)
+    val taxToPayOutput = input(readonly, value := model.earningAfterIncomeTax)
+    val corporationTax = input(readonly, value := model.earningAfterIncomeTax)
+    val earningsAfterTaxDeuctions = input(readonly, value := model.earningAfterIncomeTax)
 
 
 
@@ -102,7 +117,7 @@ object ScalaJSExample {
           ),
           h2(
             "Earnings After Tax Deductions",
-            nationalInsurance
+            earningsAfterTaxDeuctions
           ),
 
           div(
